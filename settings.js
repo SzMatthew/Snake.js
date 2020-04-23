@@ -1,0 +1,10 @@
+var spacer = 1;
+var speed = 9;
+var direction = "up";
+var square_width = 10;
+var canvas_width = 45;
+var canvas_height = 50;
+var canvas_width_pixel = canvas_width * (square_width + spacer);
+var canvas_height_pixel = canvas_height * (square_width + spacer);
+var overal_score = 0;
+var score_step = 50;
