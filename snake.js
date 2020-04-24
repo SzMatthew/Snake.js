@@ -5,10 +5,11 @@ var directions = [];
 var last_direction;
 var game_over = false;
 var restart_enabled = false;
+var start_enabled = true;
 
 function setup() {
-    createCanvas(canvas_width_pixel, canvas_height_pixel);
-    background(0);
+    InitiateCanvas();
+    startDraw();
     initializeSnake();
     generateBait();
 }
@@ -29,8 +30,7 @@ function draw() {
 
 function drawSnake() {
     clear();
-    createCanvas(canvas_width_pixel, canvas_height_pixel);
-    background(0);
+    InitiateCanvas();
     for (var i = snake_body.length - 1; i >= 0; i--) {
         fill(snake_body[i].color);
         noStroke();
@@ -98,19 +98,19 @@ function moveSnake() {
 }
 
 function keyPressed() {
-    if (keyCode == LEFT_ARROW && directions[directions.length - 1] != "right") {
+    if (keyCode == LEFT_ARROW && directions[directions.length - 1] != "right" && last_direction != "right") {
         directions.push("left");
     }
 
-    if (keyCode == UP_ARROW && directions[directions.length - 1] != "down") {
+    if (keyCode == UP_ARROW && directions[directions.length - 1] != "down" && last_direction != "down") {
         directions.push("up");
     }
 
-    if (keyCode == RIGHT_ARROW && directions[directions.length - 1] != "left") {
+    if (keyCode == RIGHT_ARROW && directions[directions.length - 1] != "left" && last_direction != "left") {
         directions.push("right");
     }
 
-    if (keyCode == DOWN_ARROW && directions[directions.length - 1] != "up") {
+    if (keyCode == DOWN_ARROW && directions[directions.length - 1] != "up" && last_direction != "up") {
         directions.push("down");
     }
 
@@ -119,6 +119,11 @@ function keyPressed() {
         overal_score = 0;
         restart_enabled = false;
         initializeSnake();
+    }
+
+    if (keyCode == 32 && start_enabled == true) {
+        loop();
+        start_enabled = false;
     }
 }
 
@@ -185,4 +190,17 @@ function initializeSnake() {
     var body3 = new Square(start_x, body2.y + square_width + spacer);
     snake_body.push(body1, body2, body3);
     directions.push("up");
+}
+
+function InitiateCanvas() {
+    let cnv = createCanvas(canvas_width_pixel, canvas_height_pixel);
+    cnv.background(0);
+}
+
+function startDraw() {
+    document.getElementById("score").value = overal_score;
+    textSize(35);
+    fill(color(255, 255, 255))
+    text('Press Space to Start!', canvas_width_pixel * 0.18, canvas_height_pixel / 2);
+    noLoop();
 }

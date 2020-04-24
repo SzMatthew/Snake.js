@@ -12,20 +12,28 @@
       font-weight: bold;
       font-family: Arial, Helvetica, sans-serif;
       margin-top: 15px;
-      margin-left: 15px;
+      text-align: center;
+      align-content: center;
     }
 
     #score_container {
       position: absolute;
-      left: 550px;
-      margin: 15px;
+      top: 120px;
+      display: inline-block;
+      margin-left: 550px;
     }
 
     #score {
       outline: none;
       border: none;
       font-size: 16px;
-      margin-left: 5px;
+      text-align: left;
+    }
+
+    h1 {
+      margin: 30px;
+      font-size: 50px;
+      color: green
     }
   </style>
 
@@ -37,6 +45,7 @@
 </head>
 
 <body>
+  <h1>Snake</h1>
   <div id="score_container">
     <a>Score:</a>
     <input type="text" id="score" size=10 readonly>
